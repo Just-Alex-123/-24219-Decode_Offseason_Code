@@ -31,6 +31,8 @@ public class Constants {
 
     static PinpointConfig pinpointConfig = new PinpointConfig(
             c -> {
+                c.name.set("pinpoint");
+
                 c.xPodDirection.set(GoBildaPinpointDriver.EncoderDirection.FORWARD);
                 c.yPodDirection.set(GoBildaPinpointDriver.EncoderDirection.FORWARD);
 
@@ -43,12 +45,12 @@ public class Constants {
 
     static ForesightConfig foresightConfig = new ForesightConfig(
             c -> {
-                c.linearBrakeCoefficients.set(new Matrix(new double[][]{new double[]{0, 0}, new double[]{0, 0}}));
-                c.quadraticBrakeCoefficients.set(new Matrix(new double[][]{new double[]{0, 0}, new double[]{0, 0}}));
-                c.maxAchievableForwardVelocity.set(80.0);
-                c.maxAchievableStrafeVelocity.set(65.0);
-                c.maxAchievableForwardDeceleration.set(35.0);
-                c.maxAchievableForwardDeceleration.set(30.0);
+                c.linearBrakeCoefficients.set(Matrix.diag(0.139333365, 0.139333365));
+                c.quadraticBrakeCoefficients.set(Matrix.diag(0.000210842, 0.000210842));
+                c.maxAchievableForwardVelocity.set(88.036);
+                c.maxAchievableStrafeVelocity.set(71.881);
+                c.maxAchievableForwardDeceleration.set(30.3333);
+                c.maxAchievableStrafeDeceleration.set(62.58098);
             }
     );
 
