@@ -16,10 +16,10 @@ import com.qualcomm.robotcore.hardware.HardwareMap;
 public class Constants {
     static MecanumConfig mecanumConfig = new MecanumConfig(
             c -> {
-                c.leftFrontName.set("leftFront");
-                c.leftRearName.set("leftRear");
-                c.rightFrontName.set("rightFront");
-                c.rightRearName.set("rightRear");
+                c.leftFrontName.set("lf");
+                c.leftRearName.set("lb");
+                c.rightFrontName.set("rf");
+                c.rightRearName.set("rb");
 
                 c.leftFrontDirection.set(DcMotorSimple.Direction.REVERSE);
                 c.leftRearDirection.set(DcMotorSimple.Direction.REVERSE);
@@ -32,13 +32,13 @@ public class Constants {
 
     static PinpointConfig pinpointConfig = new PinpointConfig(
             c -> {
-                c.name.set("pinpoint");
+                c.name.set("p");
 
                 c.xPodDirection.set(GoBildaPinpointDriver.EncoderDirection.FORWARD);
-                c.yPodDirection.set(GoBildaPinpointDriver.EncoderDirection.FORWARD);
+                c.yPodDirection.set(GoBildaPinpointDriver.EncoderDirection.REVERSED);
 
-                c.xPodOffset.set(0.0);
-                c.yPodOffset.set(0.0);
+                c.xPodOffset.set(4.1871);
+                c.yPodOffset.set(-6.433);
 
                 c.podType.set(GoBildaPinpointDriver.GoBildaOdometryPods.goBILDA_4_BAR_POD);
             }
@@ -46,11 +46,12 @@ public class Constants {
 
     static ForesightConfig foresightConfig = new ForesightConfig(
             c -> {
-                c.headingController.set(Controller.pid(1.5,0,0).plus(Controller.staticFeedforward(0.1)));
-                c.linearBrakeCoefficients.set(Matrix.diag(0.139333365, 0.139333365));
-                c.quadraticBrakeCoefficients.set(Matrix.diag(0.000210842, 0.000210842));
-                c.maxAchievableForwardVelocity.set(88.036);
-                c.maxAchievableStrafeVelocity.set(71.881);
+                c.translationalController.set(Controller.pid(.1,0,0.0003));
+                c.headingController.set(Controller.pid(1, 0, 0.00001));
+                c.linearBrakeCoefficients.set(Matrix.diag(0.0788, 0.0788));
+                c.quadraticBrakeCoefficients.set(Matrix.diag(.00191035, .00191035));
+                c.maxAchievableForwardVelocity.set(81.175);
+                c.maxAchievableStrafeVelocity.set(66.8431);
                 c.maxAchievableForwardDeceleration.set(30.3333);
                 c.maxAchievableStrafeDeceleration.set(62.58098);
             }
@@ -58,5 +59,9 @@ public class Constants {
 
     public static Follower create(HardwareMap h) {
         return new Follower(new Pinpoint(h, pinpointConfig), new Mecanum(h, mecanumConfig), new Foresight(foresightConfig));
+    }
+
+    public static Follower createSimple(HardwareMap h) {
+        return new Follower(new Pinpoint(h, pinpointConfig), new Mecanum(h, mecanumConfig), new DumbHold(foresightConfig));
     }
 }

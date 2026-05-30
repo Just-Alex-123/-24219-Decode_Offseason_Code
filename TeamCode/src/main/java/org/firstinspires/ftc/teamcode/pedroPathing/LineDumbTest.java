@@ -20,7 +20,7 @@ import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
 @Config
 @TeleOp
-public class LineTest extends OpMode {
+public class LineDumbTest extends OpMode {
     public static double DISTANCE = 24;
 
     private Path line;
@@ -37,10 +37,7 @@ public class LineTest extends OpMode {
 
     @Override
     public void start() {
-        Curve forwards = new Line(new Pose(72,72, 0), new Pose(DISTANCE + 72,72, 0));
-        Curve backwards = new Line(new Pose(DISTANCE + 72,72, 0), new Pose(72,72, 0));
-        line = new SimplePath(forwards, Interpolator.constant(0));//, new SimplePath(backwards, Interpolator.constant(0)));
-        follower.follow(line);
+        follower.hold(new Pose(72, 72, 0));
     }
 
     @Override
@@ -56,12 +53,12 @@ public class LineTest extends OpMode {
                 multipleTelemetry.addData("Size", follower.state().pathTracker().size());
                 multipleTelemetry.addData("End", follower.state().pathTracker().end());
                 multipleTelemetry.addLine();
-//                hold = follower.algorithm().hold(follower.state().pathTracker().end(), follower.state());
+                hold = follower.algorithm().hold(follower.state().pathTracker().end(), follower.state());
             }
         }
-//        multipleTelemetry.addData("Forward", hold.forward());
-//        multipleTelemetry.addData("Strafe", hold.strafe());
-//        multipleTelemetry.addData("Turn", hold.turn());
+        multipleTelemetry.addData("Forward", hold.forward());
+        multipleTelemetry.addData("Strafe", hold.strafe());
+        multipleTelemetry.addData("Turn", hold.turn());
         multipleTelemetry.update();
     }
 }

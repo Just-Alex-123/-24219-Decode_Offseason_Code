@@ -22,10 +22,11 @@ public class LocalizationTest extends OpMode {
 
     @Override
     public void loop() {
-        follower.manual(-gamepad1.left_stick_y, -gamepad1.left_stick_x, -gamepad1.right_stick_x);
+        follower.manual(-gamepad1.left_stick_y, gamepad1.left_stick_x, gamepad1.right_stick_x);
         follower.update();
         multipleTelemetry.addData("Is Busy?", follower.isBusy());
         multipleTelemetry.addData("Pose", follower.pose());
+        multipleTelemetry.addData("Turn Joystick", gamepad1.right_stick_x);
         multipleTelemetry.update();
     }
 }
