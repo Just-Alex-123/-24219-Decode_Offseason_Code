@@ -1,26 +1,18 @@
 package org.firstinspires.ftc.teamcode.pedroPathing;
 
-import androidx.core.graphics.drawable.IconCompat;
 import com.acmerobotics.dashboard.FtcDashboard;
 import com.acmerobotics.dashboard.config.Config;
 import com.acmerobotics.dashboard.telemetry.MultipleTelemetry;
-import com.pedropathing.algorithm.Algorithm;
-import com.pedropathing.algorithm.Foresight;
 import com.pedropathing.drivetrain.DrivePowers;
 import com.pedropathing.follower.Follower;
 import com.pedropathing.math.Pose;
-import com.pedropathing.paths.CompoundPath;
 import com.pedropathing.paths.Path;
-import com.pedropathing.paths.SimplePath;
-import com.pedropathing.paths.curves.Curve;
-import com.pedropathing.paths.curves.Line;
-import com.pedropathing.paths.interpolator.Interpolator;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
 @Config
 @TeleOp
-public class LineDumbTest extends OpMode {
+public class HoldTest extends OpMode {
     public static double DISTANCE = 24;
 
     private Path line;

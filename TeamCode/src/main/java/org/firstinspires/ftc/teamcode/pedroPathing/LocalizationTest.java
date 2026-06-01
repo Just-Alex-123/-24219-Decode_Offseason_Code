@@ -11,6 +11,7 @@ import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 public class LocalizationTest extends OpMode {
     private Follower follower;
     private MultipleTelemetry multipleTelemetry;
+    public double loops = 0, lastLoop = 0, loopTime = 0;
 
     @Override
     public void init() {
@@ -22,8 +23,18 @@ public class LocalizationTest extends OpMode {
 
     @Override
     public void loop() {
-        follower.manual(-gamepad1.left_stick_y, gamepad1.left_stick_x, follower.pose().heading() * 0.5);
+        loops++;
+
+        if (loops > 10) {
+            double now = System.currentTimeMillis();
+            loopTime = (now - lastLoop) / loops;
+            lastLoop = now;
+            loops = 0;
+        }
+
+        follower.manual(-gamepad1.left_stick_y, gamepad1.left_stick_x, gamepad1.right_stick_x);
         follower.update();
+        multipleTelemetry.addData("Loop Time Hz", 1000/loopTime);
         multipleTelemetry.addData("Is Busy?", follower.isBusy());
         multipleTelemetry.addData("Pose", follower.pose());
         multipleTelemetry.addData("Turn Joystick", gamepad1.right_stick_x);

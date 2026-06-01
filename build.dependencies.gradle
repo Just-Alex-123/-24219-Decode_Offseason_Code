@@ -16,7 +16,7 @@ dependencies {
     implementation 'org.firstinspires.ftc:Vision:11.1.0'
     implementation 'androidx.appcompat:appcompat:1.2.0'
 
-    implementation('com.pedropathing:revhub:3.0.0.local.alpha20') {
+    implementation('com.pedropathing:revhub:3.0.0.local.alpha25') {
         exclude group: 'org.aspectj', module: 'aspectjtools'
     }
 

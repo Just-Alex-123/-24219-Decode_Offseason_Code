@@ -46,8 +46,8 @@ public class Constants {
 
     static ForesightConfig foresightConfig = new ForesightConfig(
             c -> {
-                c.translationalController.set(Controller.pid(.1,0,0.0003));
-                c.headingController.set(Controller.pid(1, 0, 0.01));
+                c.translationalController.set(Controller.pid(.2,0,0));
+                c.headingController.set(Controller.pid(2, 0, 0.01));
                 c.linearBrakeCoefficients.set(Matrix.diag(0.0788, 0.0788));
                 c.quadraticBrakeCoefficients.set(Matrix.diag(.00191035, .00191035));
                 c.maxAchievableForwardVelocity.set(81.175);
